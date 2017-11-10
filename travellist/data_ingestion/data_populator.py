@@ -35,6 +35,10 @@ class DataPopulator:
         return writer_result
 
     def mock_load(self):
+        '''
+        We're in a dev environment so load a known-good JSON file of data.
+        :return: dict
+        '''
         try:
             mock_data = file_interpreter('travellist/resources/mock_data/mock_location_data.json')
             items_loaded = mock_data.keys().__len__
@@ -48,6 +52,7 @@ if __name__ == '__main__':
     Test the mock_load method.
     '''
     from pprint import pprint
+
     populator = DataPopulator(mock=True)
     mock_data = populator.mock_load()
     print('Found {} keys from the mock data!'.format(mock_data.keys().__len__()))
