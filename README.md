@@ -3,7 +3,7 @@
 ### Prereqs
 
 - Python 3.+
-- Boto 2.48.+
+- Boto 3.+
 
 See `requirements.txt` for the full list.
 

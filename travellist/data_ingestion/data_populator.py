@@ -4,6 +4,7 @@ import logging
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
+from travellist.data_ingestion.db_interactor import DBInteractor
 from travellist.toolkit.file_toolkit import file_interpreter
 
 # The data_populator module is used for populating the database with location data.
@@ -62,3 +63,8 @@ if __name__ == '__main__':
             v.keys().__len__(),
             v['provinces'].__len__()
         ))
+
+    # Try writing the mock data to the dev table.
+    dbi = DBInteractor(mock=True)
+    write_response = dbi.write(data_to_write=mock_data)
+    pprint(write_response)
