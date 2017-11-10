@@ -1,0 +1,34 @@
+{
+  "US": {
+    "full_name": "United States of America",
+    "gps": [ 1.1, 2.2 ],
+    "climate": "Temperate",
+    "provinces": {
+      "California": {
+        "climate": ["Warm", "Dry"],
+        "cities": {
+          "San Francisco": {},
+          "Sacramento": {},
+          "Santa Cruz": {}
+        }
+      },
+      "Washington": {
+        "climate": ["Moderate", "Wet", "Temperate"],
+        "cities": {
+          "Seattle": {},
+          "Tacoma": {},
+          "Spokane": {},
+          "Olympia": { "is_capital": true }
+        }
+      },
+      "Michigan": {
+        "climate": ["Cold", "Snowy", "Temperate"],
+        "cities": {
+          "Lansing": { "is_capital": true },
+          "Grand Rapids": {},
+          "Ann Arbor": {}
+        }
+      }
+    }
+  }
+}
