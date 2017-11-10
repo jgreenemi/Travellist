@@ -1,5 +1,3 @@
-import data_ingestion
-
 # Here we go.
 
 
