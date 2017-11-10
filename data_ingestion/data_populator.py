@@ -1,3 +1,4 @@
+import logging
 from toolkit.file_toolkit import file_interpreter
 
 
@@ -26,14 +27,16 @@ class DataPopulator:
         return writer_result
 
     def mock_load(self):
-        items_loaded = 0
-        mock_data = file_interpreter('resources/mock_data/mock_location_data.json')
-        items_loaded = mock_data.keys().__len__
-        return {'items_loaded': items_loaded}
+        try:
+            mock_data = file_interpreter('resources/mock_data/mock_location_data.json')
+            items_loaded = mock_data.keys().__len__
+            logging.debug('mock_load: Loaded {} items!'.format(items_loaded))
+            return mock_data
+        except Exception as e:
+            return {'failure': e}
 
 if __name__ == '__main__':
     from pprint import pprint
     populator = DataPopulator(mock=True)
     pprint(populator.mock_load())
-
 
