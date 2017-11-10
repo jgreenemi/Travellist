@@ -44,6 +44,9 @@ class DataPopulator:
             return {'failure': e}
 
 if __name__ == '__main__':
+    '''
+    Test the mock_load method.
+    '''
     from pprint import pprint
     populator = DataPopulator(mock=True)
     mock_data = populator.mock_load()
