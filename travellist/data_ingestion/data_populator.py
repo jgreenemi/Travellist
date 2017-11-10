@@ -1,6 +1,7 @@
 import logging
-from toolkit.file_toolkit import file_interpreter
+from travellist.toolkit.file_toolkit import file_interpreter
 
+# Module for populating the database with location data. Also includes mock data loading for dev purposes.
 
 class DataPopulator:
     def __init__(self, mock=False):
