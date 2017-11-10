@@ -46,4 +46,11 @@ class DataPopulator:
 if __name__ == '__main__':
     from pprint import pprint
     populator = DataPopulator(mock=True)
-    pprint(populator.mock_load())
+    mock_data = populator.mock_load()
+    print('Found {} keys from the mock data!'.format(mock_data.keys().__len__()))
+    for k, v in mock_data.items():
+        print('Country {} has {} attributes and {} provinces.'.format(
+            k,
+            v.keys().__len__(),
+            v['provinces'].__len__()
+        ))
