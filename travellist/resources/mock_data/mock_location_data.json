@@ -1,11 +1,13 @@
 {
   "US": {
     "full_name": "United States of America",
-    "gps": [ 1.1, 2.2 ],
     "climate": "Temperate",
     "provinces": {
       "California": {
-        "climate": ["Warm", "Dry"],
+        "climate": [
+          "Warm",
+          "Dry"
+        ],
         "cities": {
           "San Francisco": {},
           "Sacramento": {},
@@ -27,6 +29,27 @@
           "Lansing": { "is_capital": true },
           "Grand Rapids": {},
           "Ann Arbor": {}
+        }
+      }
+    }
+  },
+  "SV": {
+    "full_name": "Slovakia",
+    "climate": "Temperate",
+    "provinces": {
+      "Prešov": {
+        "cities": {
+          "Prešov": {}
+        }
+      },
+      "Košice": {
+        "cities": {
+          "Košice": {}
+        }
+      },
+      "Žilina": {
+        "cities": {
+          "Žilina": {}
         }
       }
     }

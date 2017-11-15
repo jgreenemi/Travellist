@@ -48,23 +48,33 @@ class DataPopulator:
         except Exception as e:
             return {'failure': e}
 
+    def mock_load_test(self):
+        '''
+        Test the mock_load method.
+        '''
+        from pprint import pprint
+
+        mock_data = self.mock_load()
+
+        print('Found {} keys from the mock data!'.format(mock_data.keys().__len__()))
+        for k, v in mock_data.items():
+            print('Country {} has {} attributes and {} provinces.'.format(
+                k,
+                v.keys().__len__(),
+                v['provinces'].__len__()
+            ))
+
+        # Try writing the mock data to the dev table.
+        dbi = DBInteractor(mock=True)
+        write_response = dbi.write(data_to_write=mock_data)
+
+        print('DynamoDB returned response: ')
+        pprint(write_response)
+
+        return
+
 if __name__ == '__main__':
-    '''
-    Test the mock_load method.
-    '''
-    from pprint import pprint
-
     populator = DataPopulator(mock=True)
-    mock_data = populator.mock_load()
-    print('Found {} keys from the mock data!'.format(mock_data.keys().__len__()))
-    for k, v in mock_data.items():
-        print('Country {} has {} attributes and {} provinces.'.format(
-            k,
-            v.keys().__len__(),
-            v['provinces'].__len__()
-        ))
 
-    # Try writing the mock data to the dev table.
-    dbi = DBInteractor(mock=True)
-    write_response = dbi.write(data_to_write=mock_data)
-    pprint(write_response)
+    # Verify that the mockloader runs, populates the table.
+    populator.mock_load_test()

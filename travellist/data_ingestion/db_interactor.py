@@ -39,14 +39,29 @@ class DBInteractor:
             # Do a simple write of whatever data came in. Assume that we only have a country ID to write at this point.
             write_result['response'] = []
             for k, v in data_to_write.items():
-                logging.warning('Putting ({}) {} into table!'.format(type(k), k))
+
+                # Format the data_to_write table for DynamoDB insertion.
+                # This is very much not preferable as it makes assumptions about the incoming data, which is not
+                # scalable. As a basic proof of concept for loading data into the table I'm flattening everything down
+                # to strings before writing them, just to get something written.
+                formatted_dict = {
+                    'country': {
+                        'S': k
+                    }
+                }
+
+                for subkey, subvalue in v.items():
+                    formatted_dict[subkey] = {
+                        'S': str(subvalue)
+                    }
+
+                from pprint import pprint
+                pprint(formatted_dict)
+
+                logging.warning('Writing new attributes for {} into table!'.format(k))
                 put_response = self.dbclient.put_item(
                     TableName=self.tablename,
-                    Item={
-                        'country': {
-                            'S': k
-                        }
-                    }
+                    Item=formatted_dict
                 )
                 write_result['response'].append(put_response)
 
@@ -100,6 +115,26 @@ class DBInteractor:
 
         return db_instantiation_result
 
+    def list_all(self, index='US'):
+        '''
+        Get all items from a DynamoDB table. This can be a very expensive call if the table has many records, so only
+        use in dev.
+        :return: dict
+        '''
+
+        db_full_result = {}
+
+        try:
+            table = self.dbclient.scan(
+                TableName=self.tablename,
+                Limit=10
+            )
+
+            db_full_result['table'] = table
+            db_full_result['success'] = True
+        except Exception as e:
+            db_full_result = {'failure': e}
+        return db_full_result
 
 if __name__ == '__main__':
     from pprint import pprint
@@ -114,10 +149,13 @@ if __name__ == '__main__':
     #dbi_result = dbi.describe()
     #pprint(dbi_result)
 
-    print('\n---- Getting an item from the test table.')
-    dbi_result = dbi.read()
-    pprint(dbi_result)
+    #print('\n---- Getting an item from the test table.')
+    #dbi_result = dbi.read()
+    #pprint(dbi_result)
 
+    print('\n---- Getting all items from test table.')
+    dbi_result = dbi.list_all()
+    pprint(dbi_result)
 
     #print('\n---- Dropping test table.')
     #dbi_result = dbi.drop()

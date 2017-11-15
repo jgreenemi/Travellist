@@ -17,7 +17,7 @@ $ source env/bin/activate
 
 ### Roadmap
 
-[ ] Store mock data in Dynamo.
+[x] Store mock data in Dynamo.
 [ ] Retrieve data from Dynamo.
 [ ] Create a RESTful API that can display data from Dynamo.
 [ ] Retrieve data programmatically from an external source.
